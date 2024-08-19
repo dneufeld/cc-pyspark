@@ -14,10 +14,8 @@ class ServerIPAddressJob(CCSparkJob):
     name = "ServerIPAddresses"
 
     output_schema = StructType([
-        StructField("key", StructType([
-            StructField("host", StringType(), True),
-            StructField("ip", StringType(), True)]), True),
-        StructField("cnt", LongType(), True)
+          StructField("host", StringType(), True),
+          StructField("ip", StringType(), True)
     ])
 
     response_no_ip_address = '(no IP address)'
@@ -61,7 +59,7 @@ class ServerIPAddressJob(CCSparkJob):
             except:
                 pass
 
-        yield (host_name, ip_address), 1
+        yield (host_name, ip_address)
 
 
 if __name__ == "__main__":

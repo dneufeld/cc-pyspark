@@ -212,8 +212,7 @@ class CCSparkJob(object):
         input_data = session.sparkContext.textFile(self.args.input,
                                                    minPartitions=self.args.num_input_partitions)
 
-        output = input_data.mapPartitionsWithIndex(self.process_warcs) \
-            .reduceByKey(self.reduce_by_key_func)
+        output = input_data.mapPartitionsWithIndex(self.process_warcs)
 
         session.createDataFrame(output, schema=self.output_schema) \
             .coalesce(self.args.num_output_partitions) \
